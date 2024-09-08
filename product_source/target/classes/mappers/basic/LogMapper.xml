@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.LogMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.Log">
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="log_username" jdbcType="VARCHAR" property="logUsername" />
+    <result column="log_host" jdbcType="VARCHAR" property="logHost" />
+    <result column="log_realname" jdbcType="VARCHAR" property="logRealname" />
+    <result column="log_request_method" jdbcType="VARCHAR" property="logRequestMethod" />
+    <result column="log_request_uri" jdbcType="VARCHAR" property="logRequestUri" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, log_username, log_host, log_realname, log_request_method, log_request_uri, 
+    log_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from base_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from base_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.Log">
+    insert into base_log (log_id, log_username, log_host, 
+      log_realname, log_request_method, log_request_uri, 
+      log_time)
+    values (#{logId,jdbcType=INTEGER}, #{logUsername,jdbcType=VARCHAR}, #{logHost,jdbcType=VARCHAR}, 
+      #{logRealname,jdbcType=VARCHAR}, #{logRequestMethod,jdbcType=VARCHAR}, #{logRequestUri,jdbcType=VARCHAR}, 
+      #{logTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.Log">
+    insert into base_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="logUsername != null">
+        log_username,
+      </if>
+      <if test="logHost != null">
+        log_host,
+      </if>
+      <if test="logRealname != null">
+        log_realname,
+      </if>
+      <if test="logRequestMethod != null">
+        log_request_method,
+      </if>
+      <if test="logRequestUri != null">
+        log_request_uri,
+      </if>
+      <if test="logTime != null">
+        log_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="logUsername != null">
+        #{logUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="logHost != null">
+        #{logHost,jdbcType=VARCHAR},
+      </if>
+      <if test="logRealname != null">
+        #{logRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="logRequestMethod != null">
+        #{logRequestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="logRequestUri != null">
+        #{logRequestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.Log">
+    update base_log
+    <set>
+      <if test="logUsername != null">
+        log_username = #{logUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="logHost != null">
+        log_host = #{logHost,jdbcType=VARCHAR},
+      </if>
+      <if test="logRealname != null">
+        log_realname = #{logRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="logRequestMethod != null">
+        log_request_method = #{logRequestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="logRequestUri != null">
+        log_request_uri = #{logRequestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.Log">
+    update base_log
+    set log_username = #{logUsername,jdbcType=VARCHAR},
+      log_host = #{logHost,jdbcType=VARCHAR},
+      log_realname = #{logRealname,jdbcType=VARCHAR},
+      log_request_method = #{logRequestMethod,jdbcType=VARCHAR},
+      log_request_uri = #{logRequestUri,jdbcType=VARCHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.IssueRecordMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.IssueRecord">
+    <id column="isr_id" jdbcType="INTEGER" property="isrId" />
+    <result column="isr_time" jdbcType="TIMESTAMP" property="isrTime" />
+    <result column="isr_num" jdbcType="INTEGER" property="isrNum" />
+    <result column="isr_price" jdbcType="DOUBLE" property="isrPrice" />
+    <result column="isr_deliver" jdbcType="TIMESTAMP" property="isrDeliver" />
+    <result column="isr_status" jdbcType="VARCHAR" property="isrStatus" />
+    <result column="isr_customer_id" jdbcType="INTEGER" property="isrCustomerId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    isr_id, isr_time, isr_num, isr_price, isr_deliver, isr_status, isr_customer_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from issue_record
+    where isr_id = #{isrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from issue_record
+    where isr_id = #{isrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.IssueRecord">
+    insert into issue_record (isr_id, isr_time, isr_num, 
+      isr_price, isr_deliver, isr_status, 
+      isr_customer_id)
+    values (#{isrId,jdbcType=INTEGER}, #{isrTime,jdbcType=TIMESTAMP}, #{isrNum,jdbcType=INTEGER}, 
+      #{isrPrice,jdbcType=DOUBLE}, #{isrDeliver,jdbcType=TIMESTAMP}, #{isrStatus,jdbcType=VARCHAR}, 
+      #{isrCustomerId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.IssueRecord">
+    insert into issue_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isrId != null">
+        isr_id,
+      </if>
+      <if test="isrTime != null">
+        isr_time,
+      </if>
+      <if test="isrNum != null">
+        isr_num,
+      </if>
+      <if test="isrPrice != null">
+        isr_price,
+      </if>
+      <if test="isrDeliver != null">
+        isr_deliver,
+      </if>
+      <if test="isrStatus != null">
+        isr_status,
+      </if>
+      <if test="isrCustomerId != null">
+        isr_customer_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isrId != null">
+        #{isrId,jdbcType=INTEGER},
+      </if>
+      <if test="isrTime != null">
+        #{isrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrNum != null">
+        #{isrNum,jdbcType=INTEGER},
+      </if>
+      <if test="isrPrice != null">
+        #{isrPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="isrDeliver != null">
+        #{isrDeliver,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrStatus != null">
+        #{isrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isrCustomerId != null">
+        #{isrCustomerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.IssueRecord">
+    update issue_record
+    <set>
+      <if test="isrTime != null">
+        isr_time = #{isrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrNum != null">
+        isr_num = #{isrNum,jdbcType=INTEGER},
+      </if>
+      <if test="isrPrice != null">
+        isr_price = #{isrPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="isrDeliver != null">
+        isr_deliver = #{isrDeliver,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrStatus != null">
+        isr_status = #{isrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isrCustomerId != null">
+        isr_customer_id = #{isrCustomerId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where isr_id = #{isrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.IssueRecord">
+    update issue_record
+    set isr_time = #{isrTime,jdbcType=TIMESTAMP},
+      isr_num = #{isrNum,jdbcType=INTEGER},
+      isr_price = #{isrPrice,jdbcType=DOUBLE},
+      isr_deliver = #{isrDeliver,jdbcType=TIMESTAMP},
+      isr_status = #{isrStatus,jdbcType=VARCHAR},
+      isr_customer_id = #{isrCustomerId,jdbcType=INTEGER}
+    where isr_id = #{isrId,jdbcType=INTEGER}
+  </update>
+</mapper>

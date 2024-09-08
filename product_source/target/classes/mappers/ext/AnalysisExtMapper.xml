@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.product_source.dao.ext.AnalysisExtMapper">
+    <select id="count" resultType="java.util.Map">
+        select '栏舍' as name, count(*) as num from manager_fence_house
+        union ALL
+        select  '栏圈' as name, count(*) as num from manager_hurdles
+    </select>
+    <select id="countSales" resultType="java.util.Map">
+        select MONTH(isr_time) as month,sum(isr_num) as num from issue_record
+        where year(isr_time) = year(SYSDATE())
+        group by MONTH(isr_time)
+    </select>
+</mapper>

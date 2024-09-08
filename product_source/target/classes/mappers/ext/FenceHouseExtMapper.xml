@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.product_source.dao.ext.FenceHouseExtMapper">
+    <resultMap id="resultHurdles" type="com.briup.product_source.bean.basic.Hurdles">
+        <id column="hId" property="hId"></id>
+        <result column="hName" property="hName"></result>
+        <result column="hDesc" property="hDesc"></result>
+        <result column="hMax" property="hMax"></result>
+        <result column="hSaved" property="hSaved"></result>
+        <result column="hTime" property="hTime"></result>
+        <result column="hEnable" property="hEnable"></result>
+        <result column="hFull" property="hFull"></result>
+        <result column="hFenceId" property="hFenceId"></result>
+    </resultMap>
+
+    <resultMap id="resultFenceHouse" type="com.briup.product_source.bean.ext.FenceHouseExt">
+        <id column="fhId" property="fhId"></id>
+        <result column="fhName" property="fhName"></result>
+        <result column="fhDesc" property="fhDesc"></result>
+        <result column="fhTime" property="fhTime"></result>
+        <collection property="mhs" resultMap="resultHurdles"></collection>
+    </resultMap>
+
+    <select id="findFenceHouseWithHurdles" resultMap="resultFenceHouse">
+        SELECT
+            fh.fh_id AS fhId,
+            fh.fh_name AS fhName,
+            fh.fh_desc AS fhDesc,
+            fh.fh_time AS fhTime,
+            h.h_id AS hId,
+            h.h_name AS hName,
+            h.h_desc AS hDesc,
+            h.h_max AS hMax,
+            h.h_saved AS hSaved,
+            h.h_time AS hTime,
+            h.h_enable AS hEnable,
+            h.h_full AS hFull,
+            h.h_fence_id AS hFenceId
+        FROM
+            manager_fence_house fh
+                LEFT JOIN
+            manager_hurdles h ON fh.fh_id = h.h_fence_id
+        WHERE
+            fh.fh_id = #{fenceHouseId}
+    </select>
+
+
+    <!-- 根据名称查询栏舍数量 -->
+    <select id="countByName" resultType="com.briup.product_source.bean.basic.FenceHouse">
+        SELECT * FROM manager_fence_house WHERE fh_name = #{fhName}
+    </select>
+
+
+
+    <!--分页查询-->
+    <select id="selectByName" resultMap="com.briup.product_source.dao.basic.FenceHouseMapper.BaseResultMap">
+        select <include refid="com.briup.product_source.dao.basic.FenceHouseMapper.Base_Column_List"/> from manager_fence_house
+        <where>
+            <if test="fhName != null and fhName != ''">
+                fh_name like concat('%',#{fhName},'%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByIds">
+        delete from manager_fence_house
+        where
+        <foreach collection="list" item="id" open="id in (" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

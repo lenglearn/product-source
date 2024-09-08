@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.FreezerMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.Freezer">
+    <id column="fz_id" jdbcType="INTEGER" property="fzId" />
+    <result column="fz_name" jdbcType="VARCHAR" property="fzName" />
+    <result column="fz_num" jdbcType="INTEGER" property="fzNum" />
+    <result column="fz_area" jdbcType="VARCHAR" property="fzArea" />
+    <result column="fz_quantity" jdbcType="INTEGER" property="fzQuantity" />
+    <result column="fz_temperature" jdbcType="VARCHAR" property="fzTemperature" />
+    <result column="fz_humidity" jdbcType="VARCHAR" property="fzHumidity" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fz_id, fz_name, fz_num, fz_area, fz_quantity, fz_temperature, fz_humidity
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager_freezer
+    where fz_id = #{fzId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manager_freezer
+    where fz_id = #{fzId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.Freezer">
+    insert into manager_freezer (fz_id, fz_name, fz_num, 
+      fz_area, fz_quantity, fz_temperature, 
+      fz_humidity)
+    values (#{fzId,jdbcType=INTEGER}, #{fzName,jdbcType=VARCHAR}, #{fzNum,jdbcType=INTEGER}, 
+      #{fzArea,jdbcType=VARCHAR}, #{fzQuantity,jdbcType=INTEGER}, #{fzTemperature,jdbcType=VARCHAR}, 
+      #{fzHumidity,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.Freezer">
+    insert into manager_freezer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fzId != null">
+        fz_id,
+      </if>
+      <if test="fzName != null">
+        fz_name,
+      </if>
+      <if test="fzNum != null">
+        fz_num,
+      </if>
+      <if test="fzArea != null">
+        fz_area,
+      </if>
+      <if test="fzQuantity != null">
+        fz_quantity,
+      </if>
+      <if test="fzTemperature != null">
+        fz_temperature,
+      </if>
+      <if test="fzHumidity != null">
+        fz_humidity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fzId != null">
+        #{fzId,jdbcType=INTEGER},
+      </if>
+      <if test="fzName != null">
+        #{fzName,jdbcType=VARCHAR},
+      </if>
+      <if test="fzNum != null">
+        #{fzNum,jdbcType=INTEGER},
+      </if>
+      <if test="fzArea != null">
+        #{fzArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fzQuantity != null">
+        #{fzQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="fzTemperature != null">
+        #{fzTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="fzHumidity != null">
+        #{fzHumidity,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.Freezer">
+    update manager_freezer
+    <set>
+      <if test="fzName != null">
+        fz_name = #{fzName,jdbcType=VARCHAR},
+      </if>
+      <if test="fzNum != null">
+        fz_num = #{fzNum,jdbcType=INTEGER},
+      </if>
+      <if test="fzArea != null">
+        fz_area = #{fzArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fzQuantity != null">
+        fz_quantity = #{fzQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="fzTemperature != null">
+        fz_temperature = #{fzTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="fzHumidity != null">
+        fz_humidity = #{fzHumidity,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fz_id = #{fzId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.Freezer">
+    update manager_freezer
+    set fz_name = #{fzName,jdbcType=VARCHAR},
+      fz_num = #{fzNum,jdbcType=INTEGER},
+      fz_area = #{fzArea,jdbcType=VARCHAR},
+      fz_quantity = #{fzQuantity,jdbcType=INTEGER},
+      fz_temperature = #{fzTemperature,jdbcType=VARCHAR},
+      fz_humidity = #{fzHumidity,jdbcType=VARCHAR}
+    where fz_id = #{fzId,jdbcType=INTEGER}
+  </update>
+</mapper>

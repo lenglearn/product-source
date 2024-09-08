@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.BatchMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.Batch">
+    <id column="b_serial_id" jdbcType="VARCHAR" property="bSerialId" />
+    <result column="b_desc" jdbcType="VARCHAR" property="bDesc" />
+    <result column="b_quarantine" jdbcType="VARCHAR" property="bQuarantine" />
+    <result column="b_qualified" jdbcType="VARCHAR" property="bQualified" />
+    <result column="b_time" jdbcType="TIMESTAMP" property="bTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    b_serial_id, b_desc, b_quarantine, b_qualified, b_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager_batch
+    where b_serial_id = #{bSerialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from manager_batch
+    where b_serial_id = #{bSerialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.Batch">
+    insert into manager_batch (b_serial_id, b_desc, b_quarantine, 
+      b_qualified, b_time)
+    values (#{bSerialId,jdbcType=VARCHAR}, #{bDesc,jdbcType=VARCHAR}, #{bQuarantine,jdbcType=VARCHAR}, 
+      #{bQualified,jdbcType=VARCHAR}, #{bTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.Batch">
+    insert into manager_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bSerialId != null">
+        b_serial_id,
+      </if>
+      <if test="bDesc != null">
+        b_desc,
+      </if>
+      <if test="bQuarantine != null">
+        b_quarantine,
+      </if>
+      <if test="bQualified != null">
+        b_qualified,
+      </if>
+      <if test="bTime != null">
+        b_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bSerialId != null">
+        #{bSerialId,jdbcType=VARCHAR},
+      </if>
+      <if test="bDesc != null">
+        #{bDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bQuarantine != null">
+        #{bQuarantine,jdbcType=VARCHAR},
+      </if>
+      <if test="bQualified != null">
+        #{bQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="bTime != null">
+        #{bTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.Batch">
+    update manager_batch
+    <set>
+      <if test="bDesc != null">
+        b_desc = #{bDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bQuarantine != null">
+        b_quarantine = #{bQuarantine,jdbcType=VARCHAR},
+      </if>
+      <if test="bQualified != null">
+        b_qualified = #{bQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="bTime != null">
+        b_time = #{bTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where b_serial_id = #{bSerialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.Batch">
+    update manager_batch
+    set b_desc = #{bDesc,jdbcType=VARCHAR},
+      b_quarantine = #{bQuarantine,jdbcType=VARCHAR},
+      b_qualified = #{bQualified,jdbcType=VARCHAR},
+      b_time = #{bTime,jdbcType=TIMESTAMP}
+    where b_serial_id = #{bSerialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

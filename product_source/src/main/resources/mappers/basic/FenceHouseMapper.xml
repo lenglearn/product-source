@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.FenceHouseMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.FenceHouse">
+    <id column="fh_id" jdbcType="VARCHAR" property="fhId" />
+    <result column="fh_name" jdbcType="VARCHAR" property="fhName" />
+    <result column="fh_desc" jdbcType="VARCHAR" property="fhDesc" />
+    <result column="fh_time" jdbcType="TIMESTAMP" property="fhTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fh_id, fh_name, fh_desc, fh_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager_fence_house
+    where fh_id = #{fhId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from manager_fence_house
+    where fh_id = #{fhId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.FenceHouse">
+    insert into manager_fence_house (fh_id, fh_name, fh_desc, 
+      fh_time)
+    values (#{fhId,jdbcType=VARCHAR}, #{fhName,jdbcType=VARCHAR}, #{fhDesc,jdbcType=VARCHAR}, 
+      #{fhTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.FenceHouse">
+    insert into manager_fence_house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fhId != null">
+        fh_id,
+      </if>
+      <if test="fhName != null">
+        fh_name,
+      </if>
+      <if test="fhDesc != null">
+        fh_desc,
+      </if>
+      <if test="fhTime != null">
+        fh_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fhId != null">
+        #{fhId,jdbcType=VARCHAR},
+      </if>
+      <if test="fhName != null">
+        #{fhName,jdbcType=VARCHAR},
+      </if>
+      <if test="fhDesc != null">
+        #{fhDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fhTime != null">
+        #{fhTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.FenceHouse">
+    update manager_fence_house
+    <set>
+      <if test="fhName != null">
+        fh_name = #{fhName,jdbcType=VARCHAR},
+      </if>
+      <if test="fhDesc != null">
+        fh_desc = #{fhDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fhTime != null">
+        fh_time = #{fhTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fh_id = #{fhId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.FenceHouse">
+    update manager_fence_house
+    set fh_name = #{fhName,jdbcType=VARCHAR},
+      fh_desc = #{fhDesc,jdbcType=VARCHAR},
+      fh_time = #{fhTime,jdbcType=TIMESTAMP}
+    where fh_id = #{fhId,jdbcType=VARCHAR}
+  </update>
+</mapper>

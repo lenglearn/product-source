@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.DiseaseMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.Disease">
+    <id column="d_id" jdbcType="INTEGER" property="dId" />
+    <result column="d_name" jdbcType="VARCHAR" property="dName" />
+    <result column="d_desc" jdbcType="VARCHAR" property="dDesc" />
+    <result column="d_type" jdbcType="VARCHAR" property="dType" />
+    <result column="d_etiology" jdbcType="VARCHAR" property="dEtiology" />
+    <result column="d_symptom" jdbcType="VARCHAR" property="dSymptom" />
+    <result column="d_prevention" jdbcType="VARCHAR" property="dPrevention" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    d_id, d_name, d_desc, d_type, d_etiology, d_symptom, d_prevention
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager_disease
+    where d_id = #{dId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manager_disease
+    where d_id = #{dId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.Disease">
+    insert into manager_disease (d_id, d_name, d_desc, 
+      d_type, d_etiology, d_symptom, 
+      d_prevention)
+    values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dDesc,jdbcType=VARCHAR}, 
+      #{dType,jdbcType=VARCHAR}, #{dEtiology,jdbcType=VARCHAR}, #{dSymptom,jdbcType=VARCHAR}, 
+      #{dPrevention,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.Disease">
+    insert into manager_disease
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        d_id,
+      </if>
+      <if test="dName != null">
+        d_name,
+      </if>
+      <if test="dDesc != null">
+        d_desc,
+      </if>
+      <if test="dType != null">
+        d_type,
+      </if>
+      <if test="dEtiology != null">
+        d_etiology,
+      </if>
+      <if test="dSymptom != null">
+        d_symptom,
+      </if>
+      <if test="dPrevention != null">
+        d_prevention,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        #{dId,jdbcType=INTEGER},
+      </if>
+      <if test="dName != null">
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dDesc != null">
+        #{dDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null">
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dEtiology != null">
+        #{dEtiology,jdbcType=VARCHAR},
+      </if>
+      <if test="dSymptom != null">
+        #{dSymptom,jdbcType=VARCHAR},
+      </if>
+      <if test="dPrevention != null">
+        #{dPrevention,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.Disease">
+    update manager_disease
+    <set>
+      <if test="dName != null">
+        d_name = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dDesc != null">
+        d_desc = #{dDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null">
+        d_type = #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dEtiology != null">
+        d_etiology = #{dEtiology,jdbcType=VARCHAR},
+      </if>
+      <if test="dSymptom != null">
+        d_symptom = #{dSymptom,jdbcType=VARCHAR},
+      </if>
+      <if test="dPrevention != null">
+        d_prevention = #{dPrevention,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where d_id = #{dId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.Disease">
+    update manager_disease
+    set d_name = #{dName,jdbcType=VARCHAR},
+      d_desc = #{dDesc,jdbcType=VARCHAR},
+      d_type = #{dType,jdbcType=VARCHAR},
+      d_etiology = #{dEtiology,jdbcType=VARCHAR},
+      d_symptom = #{dSymptom,jdbcType=VARCHAR},
+      d_prevention = #{dPrevention,jdbcType=VARCHAR}
+    where d_id = #{dId,jdbcType=INTEGER}
+  </update>
+</mapper>

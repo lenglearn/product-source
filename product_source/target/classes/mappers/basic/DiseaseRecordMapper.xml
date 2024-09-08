@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.product_source.dao.basic.DiseaseRecordMapper">
+  <resultMap id="BaseResultMap" type="com.briup.product_source.bean.basic.DiseaseRecord">
+    <id column="dr_id" jdbcType="INTEGER" property="drId" />
+    <result column="dr_animal_id" jdbcType="VARCHAR" property="drAnimalId" />
+    <result column="dr_desc" jdbcType="VARCHAR" property="drDesc" />
+    <result column="dr_cure" jdbcType="VARCHAR" property="drCure" />
+    <result column="dr_time" jdbcType="TIMESTAMP" property="drTime" />
+    <result column="dr_status" jdbcType="VARCHAR" property="drStatus" />
+    <result column="dr_d_id" jdbcType="INTEGER" property="drDId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dr_id, dr_animal_id, dr_desc, dr_cure, dr_time, dr_status, dr_d_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from disease_record
+    where dr_id = #{drId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from disease_record
+    where dr_id = #{drId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.product_source.bean.basic.DiseaseRecord">
+    insert into disease_record (dr_id, dr_animal_id, dr_desc, 
+      dr_cure, dr_time, dr_status, 
+      dr_d_id)
+    values (#{drId,jdbcType=INTEGER}, #{drAnimalId,jdbcType=VARCHAR}, #{drDesc,jdbcType=VARCHAR}, 
+      #{drCure,jdbcType=VARCHAR}, #{drTime,jdbcType=TIMESTAMP}, #{drStatus,jdbcType=VARCHAR}, 
+      #{drDId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.product_source.bean.basic.DiseaseRecord">
+    insert into disease_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="drId != null">
+        dr_id,
+      </if>
+      <if test="drAnimalId != null">
+        dr_animal_id,
+      </if>
+      <if test="drDesc != null">
+        dr_desc,
+      </if>
+      <if test="drCure != null">
+        dr_cure,
+      </if>
+      <if test="drTime != null">
+        dr_time,
+      </if>
+      <if test="drStatus != null">
+        dr_status,
+      </if>
+      <if test="drDId != null">
+        dr_d_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="drId != null">
+        #{drId,jdbcType=INTEGER},
+      </if>
+      <if test="drAnimalId != null">
+        #{drAnimalId,jdbcType=VARCHAR},
+      </if>
+      <if test="drDesc != null">
+        #{drDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drCure != null">
+        #{drCure,jdbcType=VARCHAR},
+      </if>
+      <if test="drTime != null">
+        #{drTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drStatus != null">
+        #{drStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="drDId != null">
+        #{drDId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.product_source.bean.basic.DiseaseRecord">
+    update disease_record
+    <set>
+      <if test="drAnimalId != null">
+        dr_animal_id = #{drAnimalId,jdbcType=VARCHAR},
+      </if>
+      <if test="drDesc != null">
+        dr_desc = #{drDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drCure != null">
+        dr_cure = #{drCure,jdbcType=VARCHAR},
+      </if>
+      <if test="drTime != null">
+        dr_time = #{drTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drStatus != null">
+        dr_status = #{drStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="drDId != null">
+        dr_d_id = #{drDId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dr_id = #{drId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.product_source.bean.basic.DiseaseRecord">
+    update disease_record
+    set dr_animal_id = #{drAnimalId,jdbcType=VARCHAR},
+      dr_desc = #{drDesc,jdbcType=VARCHAR},
+      dr_cure = #{drCure,jdbcType=VARCHAR},
+      dr_time = #{drTime,jdbcType=TIMESTAMP},
+      dr_status = #{drStatus,jdbcType=VARCHAR},
+      dr_d_id = #{drDId,jdbcType=INTEGER}
+    where dr_id = #{drId,jdbcType=INTEGER}
+  </update>
+</mapper>

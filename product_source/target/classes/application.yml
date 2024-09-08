@@ -1,0 +1,58 @@
+server:
+  port: 8899
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/product_source
+    password: 1qaz0plm
+    username: root
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  #解决swagger 启动 空指针错误
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml
+  type-aliases-package: com.briup.bean
+  configuration:
+    map-underscore-to-camel-case: true  #开启驼峰命名自动映射
+    cache-enabled: true
+logging:
+  level:
+    com.briup.product_source.dao: debug
+    com.zaxxer: error
+    org.springframework.jdbc: debug  #开启事务管理日志信息
+swagger:
+  enabled: true   #开启swagger
+  base-package: com.briup.product_source.web.controller   #扫描注解的包，生成API文档
+  title: 农业溯源项目
+  contact:
+    email: leng@briup.com
+    name: leng
+    url: www.briup.com
+  description: 项目开发阶段
+  authorization:
+    key-name: token
+    auth-regex: ^(?!/login$).*
+pagehelper:
+  helper-dialect: mysql   #指定分页语句方言（自动识别）
+  reasonable: true #分页参数合理化：pageNum<=0　第一页　pageNum>总页数 最后一页
+snowflake:
+  workerId: 1
+  datacenterId: 1
+upload:
+  filePath: D:\UPLOADTEST\images
+  serverPath: http://localhost:8000/images/
+file:
+  upload:
+    dir: D:\UPLOADTEST\images  #一个个value太麻烦了，可以封装成一个类，然后@configurationProperties(prefix="file.upload")读取
+    ip: 127.0.0.1
+    port: 8000
+    url: /images
+  download: 文件下载（暂定）
+oss:
+  accessKey: cNmJIodgblG1uFqz_OAragpMUWB0z5wNUoWhfj2s
+  secretKey: 1Knss6oyATuNDi_k5yZDxETlOQMzAj-QUvSd27TD
+  bucket: product-source-01
+  uri: http://sivumpor9.hn-bkt.clouddn.com
