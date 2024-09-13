@@ -14,7 +14,7 @@ public class JwtUtil {
 	/**
      * 过期时间5分钟
      */
-    private static final long EXPIRE_TIME = 5 * 60 * 1000;
+    private static final long EXPIRE_TIME = 10 * 60 * 1000;
     /**
      * jwt 密钥
      */

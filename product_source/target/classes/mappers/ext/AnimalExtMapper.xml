@@ -8,6 +8,21 @@
             #{id}
         </foreach>
     </delete>
+    <resultMap id="resultAnimal" type="com.briup.product_source.bean.ext.AnimalExt">
+        <id column="aAnimalId" property="aAnimalId"></id>
+        <result column="aWeight" property="aWeight"></result>
+        <result column="aGender" property="aGender"></result>
+        <result column="aHealthy" property="aHealthy"></result>
+        <result column="aStatus" property="aStatus"></result>
+        <result column="aInoculate" property="aInoculate"></result>
+        <result column="aTime" property="aTime"></result>
+        <result column="aBatchId" property="aBatchId"></result>
+        <result column="aHurdlesId" property="aHurdlesId"></result>
+        <result column="managerHurdles" property="managerHurdles"></result>
+        <result column="managerFenceHouse" property="managerFenceHouse"></result>
+        <result column="q_image_url" property="qrCodeUrl"></result>
+        <association property="managerBatch" resultMap="resultBatch"></association>
+    </resultMap>
     <select id="findAnimals" resultMap="resultAnimal">
         SELECT
             a.a_animal_id AS aAnimalId,
@@ -20,6 +35,7 @@
             a.a_batch_id AS aBatchId,
             a.a_hurdles_id AS aHurdlesId,
             h.h_name AS managerHurdles,
+            q.q_image_url,
             f.fh_name AS managerFenceHouse,
             b.b_serial_id AS bSerialId,
             b.b_desc AS bDesc,
@@ -30,6 +46,8 @@
             manager_animal a
                 LEFT JOIN
             manager_hurdles h ON a.a_hurdles_id = h.h_id
+                LEFT JOIN
+            manager_qrcode q ON a.a_animal_id = q.q_animal_id
                 LEFT JOIN
             manager_fence_house f ON h.h_fence_id = f.fh_id
                 LEFT JOIN
@@ -52,7 +70,7 @@
         <result column="bQualified" property="bQualified"></result>
         <result column="bTime" property="bTime"></result>
     </resultMap>
-    <resultMap id="resultAnimal" type="com.briup.product_source.bean.ext.ManagerAnimalExt">
+    <resultMap id="resultManagerAnimal" type="com.briup.product_source.bean.ext.ManagerAnimalExt">
         <id column="aAnimalId" property="aAnimalId"></id>
         <result column="aWeight" property="aWeight"></result>
         <result column="aGender" property="aGender"></result>
@@ -64,9 +82,10 @@
         <result column="aHurdlesId" property="aHurdlesId"></result>
         <result column="managerHurdles" property="managerHurdles"></result>
         <result column="managerFenceHouse" property="managerFenceHouse"></result>
+        <result column="q_image_url" property="qrCodeUrl"></result>
         <association property="managerBatch" resultMap="resultBatch"></association>
     </resultMap>
-    <select id="findAnimalWithBatch" resultMap="resultAnimal">
+    <select id="findAnimalWithBatch" resultMap="resultManagerAnimal">
         SELECT
             a.a_animal_id AS aAnimalId,
             a.a_weight AS aWeight,
@@ -78,6 +97,7 @@
             a.a_batch_id AS aBatchId,
             a.a_hurdles_id AS aHurdlesId,
             h.h_name AS managerHurdles,
+            q.q_image_url,
             f.fh_name AS managerFenceHouse,
             b.b_serial_id AS bSerialId,
             b.b_desc AS bDesc,
@@ -88,6 +108,8 @@
             manager_animal a
                 LEFT JOIN
             manager_hurdles h ON a.a_hurdles_id = h.h_id
+                LEFT JOIN
+            manager_qrcode q ON a.a_animal_id = q.q_animal_id
                 LEFT JOIN
             manager_fence_house f ON h.h_fence_id = f.fh_id
                 LEFT JOIN

@@ -14,7 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")//拦截所有请求路径
-                .excludePathPatterns("", //放行查询二维码信息的路径
+                .excludePathPatterns("/animal/findByAnimalId?animalId", //放行查询二维码信息的路径
+                        "http://7cttm4.natappfree.cc",
                         "/swagger-resources/**",
                         "/webjars/**",
                         "/v2/api-docs/**",
